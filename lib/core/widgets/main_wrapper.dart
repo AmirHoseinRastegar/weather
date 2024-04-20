@@ -3,6 +3,8 @@ import 'package:weather_besenior/core/widgets/bottom_navigation_bar.dart';
 import 'package:weather_besenior/features/feature_bookmark/peresntation/screens/bookmark_screen.dart';
 import 'package:weather_besenior/features/feature_weather/peresntation/screens/home_screen.dart';
 
+import 'app_background.dart';
+
 class MainWrapper extends StatelessWidget {
   final PageController pageController = PageController(initialPage: 0);
 
@@ -14,19 +16,23 @@ class MainWrapper extends StatelessWidget {
       const HomeScreen(),
       const BookMarkScreen(),
     ];
-    return Scaffold(extendBody: true,
+    return Scaffold(
+      extendBody: true,
       bottomNavigationBar: BottomNavBar(
         controller: pageController,
       ),
-      body: SizedBox(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height,
-          child: PageView(
-            controller: pageController,
-            children: pageViewWidgets,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AppBackground.getBackgroundImage(),
           )
+        ),
+        height: MediaQuery.of(context).size.height,
+        child: PageView(
+          controller: pageController,
+          children: pageViewWidgets,
+        ),
       ),
     );
   }
